@@ -4,7 +4,7 @@ pipeline {
     stage('Tool Install') {
       steps {
         tool(name: '1.17.2', type: 'go')
-        tool(name: '3.21.4', type: 'cmake')
+        tool(name: '3.21.4', type: 'CMake')
       }
     }
 
