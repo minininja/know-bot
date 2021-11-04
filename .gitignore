@@ -4,6 +4,10 @@
 *.dll
 *.so
 *.dylib
+know-bot
+
+# local secrets
+secrets
 
 # Test binary, built with `go test -c`
 *.test
