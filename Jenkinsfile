@@ -1,13 +1,10 @@
 pipeline {
   agent any
+  tools {
+    maven '3.8.2'
+    jdk '11.0.13+8'
+  }
   stages {
-    stage('Tool Install') {
-      steps {
-        tool(type: 'jdk', name: '11.0.13+8')
-        tool(name: '3.8.2', type: 'maven')
-      }
-    }
-
     stage('Build') {
       steps {
         sh 'mvn clean install'
@@ -20,6 +17,5 @@ pipeline {
 docker push mikej091/know-bot:latest'''
       }
     }
-
   }
 }
