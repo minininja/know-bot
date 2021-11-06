@@ -20,14 +20,13 @@ pipeline {
 
     stage('Build') {
       steps {
-        sh '''go get golang.org/x/tools/cmd/goimports
-go get github.com/golang/lint/golint
-go get github.com/onsi/ginkgo/ginkgo
-go get github.com/alecthomas/gometalinter
-gometalinter --install
-go get github.com/golang/dep/cmd/dep
+        sh '''/home/jenkins/agent/tools/org.jenkinsci.plugins.golang.GolangInstallation/1.17.2/go get golang.org/x/tools/cmd/goimports
+/home/jenkins/agent/tools/org.jenkinsci.plugins.golang.GolangInstallation/1.17.2/go get github.com/golang/lint/golint
+/home/jenkins/agent/tools/org.jenkinsci.plugins.golang.GolangInstallation/1.17.2/go get github.com/onsi/ginkgo/ginkgo
+/home/jenkins/agent/tools/org.jenkinsci.plugins.golang.GolangInstallation/1.17.2/go get github.com/alecthomas/gometalinter
+/home/jenkins/agent/tools/org.jenkinsci.plugins.golang.GolangInstallation/1.17.2/go get github.com/golang/dep/cmd/dep
 dep ensure
-go build -tags \'${BINARY}\' $(GOFLAGS) -o ${BINARY} -ldflags $(VERSION_STR)'''
+/home/jenkins/agent/tools/org.jenkinsci.plugins.golang.GolangInstallation/1.17.2/go build -tags \'${BINARY}\' $(GOFLAGS) -o ${BINARY} -ldflags $(VERSION_STR)'''
       }
     }
 
