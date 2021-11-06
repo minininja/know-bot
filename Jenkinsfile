@@ -14,5 +14,11 @@ docker push mikej091/know-bot:latest'''
       }
     }
 
+    stage('') {
+      steps {
+        sh 'make build'
+      }
+    }
+
   }
 }
