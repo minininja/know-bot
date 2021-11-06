@@ -20,7 +20,8 @@ pipeline {
 
     stage('Build') {
       steps {
-        sh '''/home/jenkins/agent/tools/org.jenkinsci.plugins.golang.GolangInstallation/1.17.2/bin/go get -u github.com/Necroforger/dgrouter/exrouter
+        sh '''rm Gopkg.*
+/home/jenkins/agent/tools/org.jenkinsci.plugins.golang.GolangInstallation/1.17.2/bin/go get -u github.com/Necroforger/dgrouter/exrouter
 /home/jenkins/agent/tools/org.jenkinsci.plugins.golang.GolangInstallation/1.17.2/bin/go get -u github.com/bwmarrin/discordgo
 /home/jenkins/agent/tools/org.jenkinsci.plugins.golang.GolangInstallation/1.17.2/bin/go build -tags \'$(BINARY)\' $(GOFLAGS) -o ${BINARY} '''
       }
