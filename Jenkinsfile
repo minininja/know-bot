@@ -1,5 +1,14 @@
 pipeline {
-  agent any
+  agent {
+    kubernetes {
+      containerTemplate {
+        name 'cmake'
+        image 'mikej091/inbound-agent:4.11-1'
+        command 'sleep'
+        args '999'
+      }
+    }
+  }
   stages {
     stage('Tools') {
       steps {
