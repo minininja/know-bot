@@ -1,4 +1,5 @@
 .idea
 target
 secrets
+dependency-reduced-pom.xml
 
