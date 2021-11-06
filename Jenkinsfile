@@ -22,7 +22,7 @@ pipeline {
       steps {
         sh '''/home/jenkins/agent/tools/org.jenkinsci.plugins.golang.GolangInstallation/1.17.2/bin/go get -u github.com/Necroforger/dgrouter/exrouter
 /home/jenkins/agent/tools/org.jenkinsci.plugins.golang.GolangInstallation/1.17.2/bin/go get -u github.com/bwmarrin/discordgo
-/home/jenkins/agent/tools/org.jenkinsci.plugins.golang.GolangInstallation/1.17.2/bin/go build -tags \'$(BINARY)\' $(GOFLAGS) -o ${BIN_DIR}/${BINARY} -ldflags $(VERSION_STR)'''
+/home/jenkins/agent/tools/org.jenkinsci.plugins.golang.GolangInstallation/1.17.2/bin/go build -tags \'$(BINARY)\' $(GOFLAGS) -o ${BINARY} '''
       }
     }
 
