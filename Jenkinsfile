@@ -4,7 +4,7 @@ pipeline {
     stage('Tool Install') {
       steps {
         tool(type: 'jdk', name: '11.0.13+8')
-        tool(name: '3.8.2', type: 'Maven')
+        tool(name: '3.8.2', type: 'maven')
       }
     }
 
