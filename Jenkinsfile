@@ -20,7 +20,8 @@ pipeline {
 
     stage('Build') {
       steps {
-        sh '''/home/jenkins/agent/tools/org.jenkinsci.plugins.golang.GolangInstallation/1.17.2/go get golang.org/x/tools/cmd/goimports
+        sh '''ls -l /home/jenkins/agent/tools/org.jenkinsci.plugins.golang.GolangInstallation/1.17.2
+/home/jenkins/agent/tools/org.jenkinsci.plugins.golang.GolangInstallation/1.17.2/go get golang.org/x/tools/cmd/goimports
 /home/jenkins/agent/tools/org.jenkinsci.plugins.golang.GolangInstallation/1.17.2/go get github.com/golang/lint/golint
 /home/jenkins/agent/tools/org.jenkinsci.plugins.golang.GolangInstallation/1.17.2/go get github.com/onsi/ginkgo/ginkgo
 /home/jenkins/agent/tools/org.jenkinsci.plugins.golang.GolangInstallation/1.17.2/go get github.com/alecthomas/gometalinter
