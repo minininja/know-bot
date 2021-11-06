@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kbbot-deployment
+  namespace: kbbot
+  labels:
+    app: kbbot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kbbot
+  template:
+    metadata:
+      labels:
+        app: kbbot
+    spec:
+      containers:
+        - name: kbbot
+          image: mikej091/know-bot:latest
+          command:
+            - /know-bot
+          env:
+            - name: DG_TOKEN
+#              valueFrom:
+#                secretKeyRef:
+#                  name: brobot-token
+#                  key: discord-token
