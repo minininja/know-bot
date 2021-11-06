@@ -20,9 +20,9 @@ pipeline {
 
     stage('Build') {
       steps {
-        sh '''/home/jenkins/agent/tools/org.jenkinsci.plugins.golang.GolangInstallation/1.17.2/bin/go get github.com/golang/dep/cmd/dep
-dep ensure
-/home/jenkins/agent/tools/org.jenkinsci.plugins.golang.GolangInstallation/1.17.2/bin/go build -tags \'${BINARY}\' $(GOFLAGS) -o ${BINARY} -ldflags $(VERSION_STR)'''
+        sh '''go get -u github.com/Necroforger/dgrouter/exrouter
+go get -u github.com/bwmarrin/discordgo
+go build'''
       }
     }
 
@@ -36,5 +36,6 @@ docker push mikej091/know-bot:latest'''
   }
   environment {
     BINARY = 'know-bot'
+    PATH = '$PATH:/home/jenkins/agent/tools/org.jenkinsci.plugins.golang.GolangInstallation/1.17.2/bin'
   }
 }
