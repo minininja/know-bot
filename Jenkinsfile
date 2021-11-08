@@ -1,9 +1,9 @@
 pipeline {
-  agent any
-  
-  tools {
-    maven '3.8.2'
-    jdk '11.0.13+8'
+  agent {
+    node {
+      label 'docker'
+    }
+
   }
   stages {
     stage('Build') {
@@ -12,5 +12,9 @@ pipeline {
       }
     }
 
+  }
+  tools {
+    maven '3.8.2'
+    jdk '11.0.13+8'
   }
 }
