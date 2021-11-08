@@ -7,6 +7,12 @@ pipeline {
       }
     }
 
+    stage('') {
+      steps {
+        sh 'docker build .'
+      }
+    }
+
   }
   tools {
     maven '3.8.2'
