@@ -13,8 +13,7 @@ pipeline {
 
     stage('docker push') {
       steps {
-        sh '''docker build . -t mikej091/know-bot:latest
-docker push mikej091/know-bot:latest'''
+        docker.build("mikej091/know-bot")
       }
     }
   }
