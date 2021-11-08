@@ -1,6 +1,5 @@
 pipeline {
   agent any
-  def app
   
   tools {
     maven '3.8.2'
@@ -13,8 +12,5 @@ pipeline {
       }
     }
 
-    stage('docker push') {
-      app = docker.build("mikej091/know-bot")
-    }
   }
 }
