@@ -1,5 +1,7 @@
 pipeline {
   agent any
+  def app
+  
   tools {
     maven '3.8.2'
     jdk '11.0.13+8'
@@ -12,9 +14,7 @@ pipeline {
     }
 
     stage('docker push') {
-      steps {
-        docker.build("mikej091/know-bot")
-      }
+      app = docker.build("mikej091/know-bot")
     }
   }
 }
