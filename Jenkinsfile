@@ -2,7 +2,7 @@ pipeline {
   agent any
   environment {
     registry = "mikej091/knowbot"
-    registryCredential = ‘dockerhub’
+    registryCredential = "dockerhub"
   }
   stages {
     stage('Build') {
