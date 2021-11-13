@@ -5,15 +5,19 @@ pipeline {
     registryCredential = "dockerhub"
   }
   stages {
-    stage('Build') {
+    stage('Build App') {
       steps {
-        sh 'mvn clean install'
+        container('jnlp') {
+          sh 'mvn clean install'
+        }
       }
     }
-    stage('Building image') {
+    stage('Build image') {
       steps{
-        script {
-          docker.build registry + ":$BUILD_NUMBER"
+        container('dind-daemon') {
+          script {
+            docker.build registry + ":$BUILD_NUMBER"
+          }
         }
       }
     }
