@@ -54,6 +54,7 @@ spec:
     }
     stage('Deploy') {
       steps {
+        sh 'envsubst << ${WORKSPACE}/deploy.yaml | kubectl apply -f - -n kbbot
         script {
           kubernetesDeploy(configs: "deploy.yaml", kubeconfigId: "kubernetes")
         }
