@@ -26,9 +26,7 @@ spec:
   stages {
     stage('Build') {
       steps {
-        container('maven') {
-          sh "mvn install -DskipTests"
-        }
+        sh "mvn install -DskipTests"
       }
     }
     stage('Push') {
