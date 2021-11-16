@@ -31,8 +31,6 @@ spec:
           items:
             - key: .dockerconfigjson
               path: config.json
-# sh 'img build . -t mikej091/knowbot:latest -t mikej091/knowbot:$BUILD_NUMBER'
-# sh '/kaniko/executor -f `pwd`/Dockerfile -c `pwd` --insecure-skip-tls-verify --destination=mikej091/knowbot'
 '''
     }
 
@@ -50,8 +48,7 @@ spec:
       steps {
         container(name: 'kaniko') {
           sh 'ls target'
-          sh '/kaniko/executor --context `pwd` -c `pwd` --destination=mikej091/knowbot:latest'
-          sh '/kaniko/executor --context `pwd` -c `pwd` --destination=mikej091/knowbot:$BUILD_NUMBER'
+          sh '/kaniko/executor --context `pwd` -c `pwd` --destination=mikej091/knowbot:latest --destination=mikej091/knowbot:$BUILD_NUMBER'
         }
       }
     }
