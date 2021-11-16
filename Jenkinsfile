@@ -1,7 +1,7 @@
 pipeline {
   agent {
     kubernetes {
-      yaml """
+      yaml '''
 kind: Pod
 metadata:
   name: img
@@ -20,21 +20,27 @@ spec:
 #    - name: docker-config
 #      configMap:
 #        name: docker-config
-"""  
+'''
     }
+
   }
   stages {
     stage('Build') {
       steps {
-        sh "mvn install -DskipTests"
+        tool(name: '3.8.3', type: 'maven')
+        tool(name: '11.0.13+8', type: 'jdk')
+        sh 'mvn install -DskipTests'
       }
     }
+
     stage('Push') {
       steps {
-        container('img') {
-            sh 'img build . -t mikej091/knowbot:latest -t mikej091/knowbot:$BUILD_NUMBER'
+        container(name: 'img') {
+          sh 'img build . -t mikej091/knowbot:latest -t mikej091/knowbot:$BUILD_NUMBER'
         }
+
       }
     }
+
   }
 }
