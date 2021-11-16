@@ -31,7 +31,7 @@ public class Main {
         }
         final String prefix = null == System.getenv("DG_PREFIX") ? "!" : System.getenv("DG_PREFIX");
 
-        DiscordApi api = new DiscordApiBuilder().setToken(System.getenv("DG_TOKEN")).login().join();
+        DiscordApi api = new DiscordApiBuilder().setToken(token).login().join();
         api.addMessageCreateListener(event -> {
             String message= event.getMessageContent();
             if (event.getMessageContent().startsWith(prefix)) {
