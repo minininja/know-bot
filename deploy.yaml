@@ -18,8 +18,6 @@ spec:
       containers:
         - name: kbbot
           image: mikej091/knowbot:latest
-          command:
-            - /know-bot
           env:
             - name: DG_TOKEN
               valueFrom:

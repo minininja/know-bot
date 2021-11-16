@@ -24,7 +24,7 @@ public class Main {
     public static void main(String[] args) {
         String token = System.getenv("DG_TOKEN");
         if (null == token || token.length() == 0) {
-            System.out.println("Invalid token - fix it");
+            System.out.println("Invalid token - fix it: '" + token + "'");
             System.exit(1);
         }
         final String prefix = null == System.getenv("DG_PREFIX") ? "!" : System.getenv("DG_PREFIX");
@@ -43,6 +43,5 @@ public class Main {
                 event.getChannel().sendMessage("Pong!");
             }
         });
-
     }
 }
