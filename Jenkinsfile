@@ -28,7 +28,7 @@ spec:
       - secret:
           name: docker-credentials
           items:
-            - key: dockerconfigjson
+            - key: .dockerconfigjson
               path: config.json
 # sh 'img build . -t mikej091/knowbot:latest -t mikej091/knowbot:$BUILD_NUMBER'
 # sh '/kaniko/executor -f `pwd`/Dockerfile -c `pwd` --insecure-skip-tls-verify --destination=mikej091/knowbot'
