@@ -12,19 +12,24 @@ spec:
     command:
     - cat
     tty: true
-  - name: img
-    image: jessfraz/img
+  - name: kaniko
+    image: gcr.io/kaniko-project/executor:debug
     imagePullPolicy: Always
     command:
-    - cat
+    - /busybox/cat
     tty: true
 #    volumeMounts:
-#      - name: docker-config
-#        mountPath: /home/user/.docker
+#      - name: jenkins-docker-cfg
+#        mountPath: /root
 #  volumes:
-#    - name: docker-config
-#      configMap:
-#        name: docker-config
+#  - name: jenkins-docker-cfg
+#    projected:
+#      sources:
+#      - secret:
+#          name: regcred
+#          items:
+#            - key: .dockerconfigjson
+#              path: .docker/config.json
 '''
     }
 
@@ -40,8 +45,9 @@ spec:
 
     stage('Push') {
       steps {
-        container(name: 'img') {
-          sh 'img build . -t mikej091/knowbot:latest -t mikej091/knowbot:$BUILD_NUMBER'
+        container(name: 'kaniko') {
+          sh '/kaniko/executor -f `pwd`/Dockerfile -c `pwd` --insecure-skip-tls-verify --destination=mikej091/knowbot'
+          # sh 'img build . -t mikej091/knowbot:latest -t mikej091/knowbot:$BUILD_NUMBER'
         }
       }
     }
