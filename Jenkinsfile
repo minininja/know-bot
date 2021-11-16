@@ -33,8 +33,6 @@ spec:
       steps {
         container('img') {
             sh 'img build . -t mikej091/knowbot:latest -t mikej091/knowbot:$BUILD_NUMBER'
-            sh ' img push mikej091/knowbot:latest'
-            sh ' img push mikej091/knowbot:$BUILD_NUMBER'
       }
     }
   }
