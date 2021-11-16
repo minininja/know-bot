@@ -49,6 +49,7 @@ spec:
     stage('Push') {
       steps {
         container(name: 'kaniko') {
+          sh 'ls target'
           sh '/kaniko/executor --context `pwd` -c `pwd` --destination=mikej091/knowbot:latest'
           sh '/kaniko/executor --context `pwd` -c `pwd` --destination=mikej091/knowbot:$BUILD_NUMBER'
         }
