@@ -16,8 +16,9 @@ spec:
     image: gcr.io/kaniko-project/executor:debug
     imagePullPolicy: Always
     command:
-    - /busybox/cat
-    tty: true
+    - sleep
+    args:
+    - 9999999
     volumeMounts:
       - name: jenkins-docker-cfg
         mountPath: /kaniko/.docker
@@ -26,7 +27,7 @@ spec:
     projected:
       sources:
       - secret:
-          name: docker-credentials
+          name: docker-credentials 
           items:
             - key: .dockerconfigjson
               path: config.json
@@ -47,10 +48,9 @@ spec:
 
     stage('Push') {
       steps {
-        container(name: 'kaniko') {
-          sh 'ls /kaniko'
-          sh '/kaniko/executor -f `pwd`/Dockerfile -c `pwd` --destination=mikej091/knowbot:latest'
-          sh '/kaniko/executor -f `pwd`/Dockerfile -c `pwd` --destination=mikej091/knowbot:$BUILD_NUMBER'
+        container(name: 'kaniko', shell: 'busybox/sh') {
+          sh '/kaniko/executor --context `pwd` -c `pwd` --destination=mikej091/knowbot:latest'
+          sh '/kaniko/executor --context `pwd` -c `pwd` --destination=mikej091/knowbot:$BUILD_NUMBER'
         }
       }
     }
