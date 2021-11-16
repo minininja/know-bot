@@ -18,18 +18,18 @@ spec:
     command:
     - /busybox/cat
     tty: true
-#    volumeMounts:
-#      - name: jenkins-docker-cfg
-#        mountPath: /root
-#  volumes:
-#  - name: jenkins-docker-cfg
-#    projected:
-#      sources:
-#      - secret:
-#          name: regcred
-#          items:
-#            - key: .dockerconfigjson
-#              path: .docker/config.json
+    volumeMounts:
+      - name: jenkins-docker-cfg
+        mountPath: /root
+  volumes:
+  - name: jenkins-docker-cfg
+    projected:
+      sources:
+      - secret:
+          name: secret-dockercfg
+          items:
+            - key: configjson
+              path: .docker/config.json
 # sh 'img build . -t mikej091/knowbot:latest -t mikej091/knowbot:$BUILD_NUMBER'
 # sh '/kaniko/executor -f `pwd`/Dockerfile -c `pwd` --insecure-skip-tls-verify --destination=mikej091/knowbot'
 '''
