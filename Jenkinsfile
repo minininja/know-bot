@@ -52,5 +52,13 @@ spec:
         }
       }
     }
+    stage('Deploy') {
+      steps {
+        script {
+          kubernetesDeploy(configs: "deploy.yaml", kubeconfigId: "miniconfig")
+        }
+      }
+    }
+
   }
 }
