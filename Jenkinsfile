@@ -41,6 +41,7 @@ spec:
         container(name: 'maven') {
           sh 'mvn install -DskipTests'
         }
+
       }
     }
 
@@ -50,11 +51,13 @@ spec:
           sh 'ls target'
           sh '/kaniko/executor --context `pwd` -c `pwd` --destination=mikej091/knowbot:latest --destination=mikej091/knowbot:$BUILD_NUMBER'
         }
+
       }
     }
+
     stage('Deploy') {
       steps {
-        sh 'envsubst << ${WORKSPACE}/deploy.yaml | kubectl apply -f - -n kbbot'
+        sh 'kubectl apply -f deploy.yaml -n kbbot'
       }
     }
 
