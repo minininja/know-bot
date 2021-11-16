@@ -33,6 +33,7 @@ spec:
       steps {
         container('img') {
             sh 'img build . -t mikej091/knowbot:latest -t mikej091/knowbot:$BUILD_NUMBER'
+        }
       }
     }
   }
