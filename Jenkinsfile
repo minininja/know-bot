@@ -1,44 +1,28 @@
 pipeline {
   agent {
     kubernetes {
-      label 'spring-petclinic-demo'
-      defaultContainer 'jnlp'
       yaml """
-apiVersion: v1
 kind: Pod
 metadata:
-labels:
-  component: ci
+  name: img
 spec:
-  # Use service account that can deploy to all namespaces
-  serviceAccountName: cd-jenkins
   containers:
-  - name: maven
-    image: maven:latest
+  - name: img
+    image: jessfraz/img
+    imagePullPolicy: Always
     command:
     - cat
     tty: true
     volumeMounts:
-      - mountPath: "/root/.m2"
-        name: m2
-  - name: docker
-    image: docker:latest
-    command:
-    - cat
-    tty: true
-    volumeMounts:
-    - mountPath: /var/run/docker.sock
-      name: docker-sock
+      - name: docker-config
+        mountPath: /home/user/.docker
   volumes:
-    - name: docker-sock
-      hostPath:
-        path: /var/run/docker.sock
-    - name: m2
-      persistentVolumeClaim:
-        claimName: m2
-"""
-}
-   }
+    - name: docker-config
+      configMap:
+        name: docker-config
+"""  
+    }
+  }
   stages {
     stage('Build') {
       steps {
@@ -49,9 +33,10 @@ spec:
     }
     stage('Push') {
       steps {
-        container('docker') {
-          sh "docker build -t spring-petclinic-demo:$BUILD_NUMBER ."
-        }
+        container('img') {
+            sh 'img build . -t mikej091/knowbot:latest -t mikej091/knowbot:$BUILD_NUMBER'
+            sh ' img push mikej091/knowbot:latest'
+            sh ' img push mikej091/knowbot:$BUILD_NUMBER'
       }
     }
   }
