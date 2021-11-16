@@ -55,7 +55,7 @@ spec:
     stage('Deploy') {
       steps {
         script {
-          kubernetesDeploy(configs: "deploy.yaml", kubeconfigId: "miniconfig")
+          kubernetesDeploy(configs: "deploy.yaml", kubeconfigId: "kubernetes")
         }
       }
     }
