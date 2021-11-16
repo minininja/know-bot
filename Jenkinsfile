@@ -9,6 +9,9 @@ spec:
   containers:
   - name: maven
     image: adoptopenjdk/maven-openjdk11
+    command:
+    - cat
+    tty: true
   - name: img
     image: jessfraz/img
     imagePullPolicy: Always
