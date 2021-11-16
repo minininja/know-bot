@@ -27,6 +27,7 @@ public class Main {
             System.out.println("Invalid token - fix it: '" + token + "'");
             System.exit(1);
         }
+        System.out.println("Using '" + token + "'");
         final String prefix = null == System.getenv("DG_PREFIX") ? "!" : System.getenv("DG_PREFIX");
 
         DiscordApi api = new DiscordApiBuilder().setToken(System.getenv("DG_TOKEN")).login().join();
