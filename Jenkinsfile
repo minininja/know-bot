@@ -13,13 +13,13 @@ spec:
     command:
     - cat
     tty: true
-    volumeMounts:
-      - name: docker-config
-        mountPath: /home/user/.docker
-  volumes:
-    - name: docker-config
-      configMap:
-        name: docker-config
+#    volumeMounts:
+#      - name: docker-config
+#        mountPath: /home/user/.docker
+#  volumes:
+#    - name: docker-config
+#      configMap:
+#        name: docker-config
 """  
     }
   }
