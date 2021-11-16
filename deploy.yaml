@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: kbbot
-          image: mikej091/know-bot:latest
+          image: mikej091/knowbot:latest
           command:
             - /know-bot
           env:
