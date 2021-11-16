@@ -22,7 +22,7 @@ spec:
             - /know-bot
           env:
             - name: DG_TOKEN
-#              valueFrom:
-#                secretKeyRef:
-#                  name: brobot-token
-#                  key: discord-token
+              valueFrom:
+                secretKeyRef:
+                  name: knowbot-token
+                  key: discord-token
