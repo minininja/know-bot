@@ -60,14 +60,5 @@ spec:
 
       }
     }
-
-    stage('Deploy') {
-      steps {
-        container(name: 'kubectl') {
-          sh 'kubectl apply -f deploy.yaml -n kbbot'
-        }
-      }
-    }
-
   }
 }
