@@ -12,6 +12,11 @@ spec:
     command:
     - cat
     tty: true
+  - name: kubectl
+    image: lachlanevenson/k8s-kubectl:v1.8.8
+    command:
+    - cat
+    tty: true
   - name: kaniko
     image: gcr.io/kaniko-project/executor:debug
     imagePullPolicy: Always
@@ -57,7 +62,9 @@ spec:
 
     stage('Deploy') {
       steps {
-        sh 'kubectl apply -f deploy.yaml -n kbbot'
+        container(name: 'kubectl') {
+          sh 'kubectl apply -f deploy.yaml -n kbbot'
+        }
       }
     }
 
