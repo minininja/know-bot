@@ -20,7 +20,7 @@ spec:
     tty: true
     volumeMounts:
       - name: jenkins-docker-cfg
-        mountPath: /root
+        mountPath: /kaniko
   volumes:
   - name: jenkins-docker-cfg
     projected:
@@ -48,7 +48,7 @@ spec:
     stage('Push') {
       steps {
         container(name: 'kaniko') {
-          sh '/root/.docker'
+          sh 'ls /kaniko'
           sh '/kaniko/executor -f `pwd`/Dockerfile -c `pwd` --destination=mikej091/knowbot:latest'
           sh '/kaniko/executor -f `pwd`/Dockerfile -c `pwd` --destination=mikej091/knowbot:$BUILD_NUMBER'
         }
