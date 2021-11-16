@@ -7,6 +7,8 @@ metadata:
   name: img
 spec:
   containers:
+  - name: maven
+    image: adoptopenjdk/maven-openjdk11
   - name: img
     image: jessfraz/img
     imagePullPolicy: Always
@@ -27,9 +29,9 @@ spec:
   stages {
     stage('Build') {
       steps {
-        tool(name: '3.8.3', type: 'maven')
-        tool(name: '11.0.13+8', type: 'jdk')
-        sh 'mvn install -DskipTests'
+        container(name: 'maven') {
+          sh 'mvn install -DskipTests'
+        }
       }
     }
 
@@ -38,9 +40,7 @@ spec:
         container(name: 'img') {
           sh 'img build . -t mikej091/knowbot:latest -t mikej091/knowbot:$BUILD_NUMBER'
         }
-
       }
     }
-
   }
 }
