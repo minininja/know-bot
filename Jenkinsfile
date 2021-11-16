@@ -48,7 +48,9 @@ spec:
     stage('Push') {
       steps {
         container(name: 'kaniko') {
-          sh '/kaniko/executor -f `pwd`/Dockerfile -c `pwd` --destination=mikej091/knowbot'
+          sh '/root/.docker'
+          sh '/kaniko/executor -f `pwd`/Dockerfile -c `pwd` --destination=mikej091/knowbot:latest'
+          sh '/kaniko/executor -f `pwd`/Dockerfile -c `pwd` --destination=mikej091/knowbot:$BUILD_NUMBER'
         }
       }
     }
