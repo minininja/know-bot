@@ -46,6 +46,7 @@ spec:
         container(name: 'maven') {
           sh 'mvn install -DskipTests'
         }
+
       }
     }
 
@@ -54,7 +55,15 @@ spec:
         container(name: 'kaniko') {
           sh '/kaniko/executor --context `pwd` -c `pwd` --destination=mikej091/knowbot:latest --destination=mikej091/knowbot:$BUILD_NUMBER'
         }
+
       }
     }
+
+    stage('garbage') {
+      steps {
+        sleep 1
+      }
+    }
+
   }
 }
