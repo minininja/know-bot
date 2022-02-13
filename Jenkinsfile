@@ -44,19 +44,26 @@ spec:
     stage('Build') {
       steps {
         container(name: 'maven') {
-          //  sh 'mkdir -p $HOME/.m2 && echo "<settings xmlns=\"http://maven.apache.org/SETTINGS/1.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd\"><mirrors><mirror><id>central-mirror</id><name>Central Mirror</name><url>http://mini:30683/nexus/content/repositories/central/</url><mirrorOf>central</mirrorOf></mirror></mirrors></settings>" > $HOME/.m2/settings.xml'
           sh 'mvn install -DskipTests'
         }
+
       }
     }
 
     stage('Push') {
       steps {
         container(name: 'kaniko') {
-          sh 'ls target'
           sh '/kaniko/executor --context `pwd` -c `pwd` --destination=mikej091/knowbot:latest --destination=mikej091/knowbot:$BUILD_NUMBER'
         }
+
       }
     }
+
+    stage('garbage') {
+      steps {
+        sleep 1
+      }
+    }
+
   }
 }
