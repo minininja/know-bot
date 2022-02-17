@@ -17,7 +17,8 @@ spec:
     spec:
       containers:
         - name: kbbot
-          image: mikej091/knowbot:latest
+          image: mikej091/know-bot:latest
+          imagePullPolicy: Always
           env:
             - name: DG_TOKEN
               valueFrom:

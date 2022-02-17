@@ -30,7 +30,6 @@ public class KnowCommand implements Command {
     protected static final String CACHE_NAME = "kbChannelCache";
     private static Cache CACHE = CacheManager.getInstance().getCache(CACHE_NAME);
 
-
     static {
         CACHE = CacheManager.getInstance().getCache(CACHE_NAME);
         if (null == CACHE) {
