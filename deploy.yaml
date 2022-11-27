@@ -1,3 +1,10 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: kbbot
+
+---
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -20,6 +27,8 @@ spec:
           image: mikej091/know-bot:latest
           imagePullPolicy: Always
           env:
+            - name: GRAPHITE
+              value: graphite-svc.grafana
             - name: DG_TOKEN
               valueFrom:
                 secretKeyRef:

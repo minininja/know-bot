@@ -68,4 +68,10 @@ public class ChannelMatcherTests {
         Assert.assertEquals(channels.get(0), matches.iterator().next().getSecond());
     }
 
+    @Test
+    public void testRegex() {
+        String input = "!kb test 43143 $#!$#@$ fdsafsd";
+        System.out.println(input.replaceAll("!kb ", "").replaceAll("[^\\w\\s]", ""));
+    }
+
 }

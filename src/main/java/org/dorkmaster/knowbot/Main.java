@@ -3,6 +3,7 @@ package org.dorkmaster.knowbot;
 import org.dorkmaster.knowbot.command.Command;
 import org.dorkmaster.knowbot.command.KnowCommand;
 import org.dorkmaster.knowbot.command.PingCommand;
+import org.dorkmaster.knowbot.util.Metrics;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.DiscordApiBuilder;
 import org.slf4j.Logger;
@@ -32,6 +33,8 @@ public class Main {
             token = token.trim();
         }
         final String prefix = null == System.getenv("DG_PREFIX") ? "!" : System.getenv("DG_PREFIX");
+
+        Metrics.inc("Startup");
 
         DiscordApiBuilder builder = new DiscordApiBuilder().setToken(token);
         CompletableFuture<DiscordApi> future =  builder.login();

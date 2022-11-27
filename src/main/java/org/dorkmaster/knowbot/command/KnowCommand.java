@@ -4,6 +4,7 @@ import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;
 import org.dorkmaster.knowbot.util.ChannelMatcher;
+import org.dorkmaster.knowbot.util.Metrics;
 import org.dorkmaster.knowbot.util.Pair;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.entity.channel.ServerChannel;
@@ -66,14 +67,22 @@ public class KnowCommand implements Command {
         return false;
     }
 
+    protected String cleanup(String input) {
+        return input.replaceAll("!kb ", "")
+                .replaceAll("[^\\w\\s]", "")
+                .replaceAll("\\s\\s", " ");
+    }
 
     @Override
     public void handleMessage(DiscordApi api, String[] messageParts, MessageCreateEvent event)  {
+        Metrics.mark("Requests");
         try {
             TextChannel replyChannel = event.getChannel();
             Optional<Server> server = event.getServer();
 
             if (server.isPresent()) {
+                Metrics.mark("Server-" + server.get().getId());
+
                 ChannelMatcher cm = null;
                 Element e = CACHE.get(server.get().getId());
                 if (null == e || e.isExpired()) {
@@ -87,8 +96,9 @@ public class KnowCommand implements Command {
                     cm = (ChannelMatcher) e.getObjectValue();
                 }
 
-                Collection<Pair<Double, String>> matches = cm.matches(event.getMessageContent());
-                logger.debug("Term '{}' matches '{}'", event.getMessageContent(), matches);
+                String cleaned = cleanup(event.getMessageContent());
+                Collection<Pair<Double, String>> matches = cm.matches(cleaned);
+                logger.debug("Term '{}' matches '{}'", cleaned, matches);
                 if (0 != matches.size()) {
                     Pair<Double, String> match = matches.iterator().next();
                     logger.info("Term '{}' Match '{}' Weight {}", event.getMessageContent(), match.getSecond(), match.getFirst());
